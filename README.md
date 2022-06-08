@@ -1,4 +1,4 @@
-# wiki_grabber
+# Wiki Grabber
 k8s cronjob to download random wikipedia articles.
 
 Every night at midnight, this program will download a random wikipedia page and store it to a persistent disk.
@@ -108,15 +108,13 @@ job.batch/wiki-grabber-27577565   1/1           4s         35s
 If you run the `tunnel.sh` script you should be able to see our files easily:
 ```shell
 % bash tunnel.sh 
-kubectl exec [POD] [COMMAND] is DEPRECATED and will be removed in a future version. Use kubectl exec [POD] -- [COMMAND] instead.
 / # ls
 bin            etc            media          proc           sbin           tmp            wiki_pages
 dev            home           mnt            root           srv            usr
 entrypoint.sh  lib            opt            run            sys            var
 / # cd wiki_pages/
-/wiki_pages # ls
-Applications                  Library                       Public                        src
-Desktop                       Movies                        Wed Jun  8 02:04:10 UTC 2022
-Documents                     Music                         Wed Jun  8 02:05:00 UTC 2022
-Downloads                     Pictures                      Wed Jun  8 02:06:00 UTC 2022
+/wiki_pages # ls -l
+total 352
+-rw-r--r--    1 root     root        256852 Jun  8 02:17 Wed Jun  8 02:17:00 UTC 2022
+-rw-r--r--    1 root     root        101805 Jun  8 02:18 Wed Jun  8 02:18:00 UTC 2022
 ```
