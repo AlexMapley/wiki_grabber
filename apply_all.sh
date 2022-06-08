@@ -6,7 +6,7 @@
 kubectl apply -f pv.yaml
 kubectl apply -f pvc.yaml
 kubectl apply -f cronjob.yaml
-kubectl apply -f deployment.yaml
+kubectl apply -f sts.yaml
 
 # Display objects afterwards
 kubectl get all,pvc,pv
