@@ -9,4 +9,4 @@ spec:
   accessModes:
     - ReadWriteMany # ReadWriteMany so we can mount this container on multiple pods
   hostPath:
-    path: "/Users/al" # This will mount to my laptop's home directory
+    path: "/Users/al/Desktop" # This will mount to my laptop's desktop
