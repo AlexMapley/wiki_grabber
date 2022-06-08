@@ -1,0 +1,34 @@
+# This deployment is useful if you would like to mount and
+# inspect the volume our cronjobs have been writing to.
+#
+# This was not required for the project but is just helpful to demo.
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: volume-inspector
+spec:
+  serviceName: wiki-grabber
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wiki-grabber
+  template:
+    metadata:
+      labels:
+        app: wiki-grabber
+    spec:
+      containers:
+      - name: volume-inspector
+        image: alpine/curl
+        imagePullPolicy: IfNotPresent
+        command:
+        - /bin/sh
+        - -c
+        - sleep infinity
+        volumeMounts:
+        - mountPath: /wiki_pages
+          name: wiki-grabber-storage
+      volumes:
+      - name: wiki-grabber-storage
+        persistentVolumeClaim:
+          claimName:  wiki-grabber-claim

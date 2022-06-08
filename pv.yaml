@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: wiki-grabber
+spec:
+  storageClassName: hostpath
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteMany # ReadWriteMany so we can mount this container on multiple pods
+  hostPath:
+    path: "/Users/al" # This will mount to my laptop's home directory

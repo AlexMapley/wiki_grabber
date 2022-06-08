@@ -1,24 +1,30 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: wiki_grabber
+  name: wiki-grabber
 spec:
   # A cron running at midnight would look like:
   # schedule: "0 0 * * *"
-  # Our cron runs every minute instead for debugging
+  # Our cron runs every minute instead for demoing purposes.
   schedule: "* * * * *"
   jobTemplate:
     spec:
       template:
         spec:
           containers:
-          - name: hello
-            image: ubuntu:latest
+          - name: curler
+            image: alpine/curl
             imagePullPolicy: IfNotPresent
             command:
             - /bin/sh
             - -c
-            - curl 
-            - -L 
-            - https://en.wikipedia.org/api/rest_v1/page/random/html
+            - |
+              curl -L https://en.wikipedia.org/api/rest_v1/page/random/html >> /wiki_pages/$(date)
+            volumeMounts:
+            - mountPath: /wiki_pages
+              name: wiki-grabber-storage
+          volumes:
+          - name: wiki-grabber-storage
+            persistentVolumeClaim:
+              claimName:  wiki-grabber-claim
           restartPolicy: OnFailure
