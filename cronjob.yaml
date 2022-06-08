@@ -19,7 +19,7 @@ spec:
             - /bin/sh
             - -c
             - |
-              curl -L https://en.wikipedia.org/api/rest_v1/page/random/html >> /wiki_pages/$(date)
+              curl -L https://en.wikipedia.org/api/rest_v1/page/random/html >> /wiki_pages/`date`
             volumeMounts:
             - mountPath: /wiki_pages
               name: wiki-grabber-storage
